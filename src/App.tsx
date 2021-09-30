@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Clouds from "images/clouds.jpg";
+import Login from "components/Login.component";
+import Playground from "components/Playground.component";
+import React, { useCallback, useState } from "react";
 
-function App() {
+const App = () => {
+  const [userName, setUserName] = useState("");
+
+  const handleSetUserName = useCallback((name: string) => {
+    setUserName(name);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <img className="bg" src={Clouds} alt="Clouds" />
+      {userName ? (
+        <Playground name={userName} />
+      ) : (
+        <Login setUserName={handleSetUserName} />
+      )}
     </div>
   );
-}
+};
 
 export default App;
